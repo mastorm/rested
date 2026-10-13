@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "main",
+  "description": "Local window events and notification permissions. No remote content or filesystem access from the frontend.",
+  "windows": ["main"],
+  "permissions": ["core:default", "core:window:allow-start-dragging", "notification:allow-is-permission-granted", "notification:allow-request-permission"]
+}

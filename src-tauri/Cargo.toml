@@ -1,0 +1,34 @@
+[package]
+name = "rested"
+version = "0.1.0"
+description = "Earn your adventures. A study-powered playtime timer."
+authors = ["Mathias"]
+edition = "2021"
+rust-version = "1.77.2"
+
+[lib]
+name = "rested_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-notification = "2"
+tauri-plugin-single-instance = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+chrono = { version = "0.4", features = ["serde"] }
+
+[dev-dependencies]
+tempfile = "3"
+
+# Rust 1.95's Mach-O stripping can produce dylibs rejected by macOS 27.
+# Keep build-time proc macros loadable without changing the system toolchain.
+# https://github.com/rust-lang/rust/issues/157750
+[profile.release]
+strip = "none"
+
+[profile.release.build-override]
+strip = "none"
